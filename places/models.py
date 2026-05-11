@@ -1,11 +1,26 @@
 from django.db import models
 
+
 class Place(models.Model):
-    title = models.CharField(max_length=200)
-    description_short = models.TextField()
-    description_long = models.TextField()
-    lng = models.FloatField()
-    lat = models.FloatField()
+    title = models.CharField('Название', max_length=200)
+    description_short = models.TextField('Краткое описание')
+    description_long = models.TextField('Подробное описание')
+    lng = models.FloatField('Долгота')
+    lat = models.FloatField('Широта')
 
     def __str__(self):
         return self.title
+    
+
+class Image(models.Model):
+    place = models.ForeignKey(
+        Place, 
+        on_delete=models.CASCADE, 
+        related_name='images', 
+        verbose_name='Место'
+    )
+    image = models.ImageField('Изображение')
+    order = models.PositiveIntegerField('Порядковый номер', default=0)
+
+    def __str__(self):
+        return f"{self.order} {self.place.title}"
