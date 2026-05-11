@@ -19,7 +19,7 @@ class Image(models.Model):
         related_name='images', 
         verbose_name='Место'
     )
-    image = models.ImageField('Изображение')
+    image = models.ImageField('Изображение', upload_to='images/')
     order = models.PositiveIntegerField('Порядковый номер', default=0)
 
     def __str__(self):
