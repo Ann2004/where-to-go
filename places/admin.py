@@ -1,14 +1,16 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from adminsortable2.admin import SortableTabularInline, SortableAdminBase
 
 from .models import Place, Image
 
 
-class ImageInline(admin.TabularInline):
+class ImageInline(SortableTabularInline):
     model = Image
     extra = 1
     readonly_fields = ('image_preview',)
     fields = ('image', 'image_preview', 'order')
+    sortable_field_name = 'order'
 
     def image_preview(self, obj):
         if obj.image:
@@ -20,11 +22,8 @@ class ImageInline(admin.TabularInline):
 
 
 @admin.register(Place)
-class PlaceAdmin(admin.ModelAdmin):
+class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     readonly_fields = ('id',)
     inlines = [
         ImageInline
     ]
-
-
-admin.site.register(Image)

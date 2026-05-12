@@ -23,5 +23,8 @@ class Image(models.Model):
     image = models.ImageField('Изображение', upload_to='images/')
     order = models.PositiveIntegerField('Позиция', default=0)
 
+    class Meta:
+        ordering = ['order']
+
     def __str__(self):
         return f"{self.order} {self.place.title}"
