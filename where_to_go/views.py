@@ -2,6 +2,7 @@ from django.shortcuts import render
 from places.models import Place
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
+from django.urls import reverse
 
 def show_index(request):
     places = Place.objects.all()
@@ -18,7 +19,7 @@ def show_index(request):
           "properties": {
             "title": place.title,
             "placeId": place.place_id,
-            "detailsUrl": ""
+            "detailsUrl": reverse('place_detail', args=[place.id])
           }
         }
         for place in places
