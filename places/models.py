@@ -21,7 +21,7 @@ class Image(models.Model):
         verbose_name='Место'
     )
     image = models.ImageField('Изображение', upload_to='images/')
-    order = models.PositiveIntegerField('Порядковый номер', default=0)
+    order = models.PositiveIntegerField('Позиция', default=0)
 
     def __str__(self):
         return f"{self.order} {self.place.title}"
