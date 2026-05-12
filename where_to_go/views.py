@@ -1,6 +1,12 @@
 from django.shortcuts import render
+from places.models import Place
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+
 
 def show_index(request):
+    places = Place.objects.all()
+
     geojson_data = {
       "type": "FeatureCollection",
       "features": [
@@ -8,26 +14,20 @@ def show_index(request):
           "type": "Feature",
           "geometry": {
             "type": "Point",
-            "coordinates": [37.62, 55.793676]
+            "coordinates": [place.lng, place.lat]
           },
           "properties": {
-            "title": "«Легенды Москвы",
-            "placeId": "moscow_legends",
-            "detailsUrl": "/static/places/moscow_legends.json"
-          }
-        },
-        {
-          "type": "Feature",
-          "geometry": {
-            "type": "Point",
-            "coordinates": [37.64, 55.753676]
-          },
-          "properties": {
-            "title": "Крыши24.рф",
-            "placeId": "roofs24",
-            "detailsUrl": "/static/places/roofs24.json"
+            "title": place.title,
+            "placeId": place.place_id,
+            "detailsUrl": ""
           }
         }
+        for place in places
       ]
     }
     return render(request, 'index.html', {'geojson_data': geojson_data})
+
+
+def place_detail(request, id):
+    place = get_object_or_404(Place, id=id)
+    return HttpResponse(place.title)
