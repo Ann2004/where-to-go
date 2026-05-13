@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'adminsortable2',
     'where_to_go',
-    'places.apps.PlacesConfig'
+    'places.apps.PlacesConfig',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
