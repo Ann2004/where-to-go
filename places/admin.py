@@ -23,7 +23,7 @@ class ImageInline(SortableTabularInline):
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
-    readonly_fields = ('id',)
+    readonly_fields = ('id', 'place_id')
     inlines = [
         ImageInline
     ]
