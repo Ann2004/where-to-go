@@ -18,7 +18,6 @@ def show_index(request):
           },
           "properties": {
             "title": place.title,
-            "placeId": place.place_id,
             "detailsUrl": reverse('place_detail', args=[place.id])
           }
         }
