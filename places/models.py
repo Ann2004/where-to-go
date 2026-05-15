@@ -5,8 +5,8 @@ import uuid
 
 class Place(models.Model):
     title = models.CharField('Название', max_length=200, unique=True)
-    description_short = models.TextField('Краткое описание')
-    description_long = HTMLField('Подробное описание')
+    short_description = models.TextField('Краткое описание')
+    long_description = HTMLField('Подробное описание')
     lng = models.FloatField('Долгота')
     lat = models.FloatField('Широта')
 
