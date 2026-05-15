@@ -22,7 +22,7 @@ class Command(BaseCommand):
         
         place_content = place_response.json()
         
-        obj, created = Place.objects.get_or_create(
+        place, created = Place.objects.get_or_create(
             title=place_content['title'],
             defaults={
                 'short_description': place_content['description_short'],
@@ -42,7 +42,7 @@ class Command(BaseCommand):
                     image_content = ContentFile(place_img_response.content, name=filename)
                     
                     Image.objects.create(
-                        place=obj,
+                        place=place,
                         image=image_content,
                         order=order
                     )
