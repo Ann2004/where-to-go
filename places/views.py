@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from places.models import Place
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.urls import reverse
+
+from places.models import Place
+
 
 def show_index(request):
     places = Place.objects.all()

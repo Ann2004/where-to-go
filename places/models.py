@@ -1,6 +1,5 @@
 from django.db import models
 from tinymce.models import HTMLField
-import uuid
 
 
 class Place(models.Model):
