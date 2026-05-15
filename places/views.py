@@ -27,8 +27,8 @@ def show_index(request):
     return render(request, 'index.html', {'geojson_data': geojson_data})
 
 
-def place_detail(request, id):
-    place = get_object_or_404(Place, id=id)
+def place_detail(request, place_id):
+    place = get_object_or_404(Place, id=place_id)
     images = place.images.all().order_by('order')
 
     imgs_urls = [img.image.url for img in images]
