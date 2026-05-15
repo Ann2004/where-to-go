@@ -113,3 +113,12 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = env.str('MEDIA_URL', 'media/')
 MEDIA_ROOT = env.path('MEDIA_ROOT', BASE_DIR / 'media')
+
+
+if DEBUG:
+    INSTALLED_APPS.append('debug_toolbar')
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+    INTERNAL_IPS = [
+        '127.0.0.1',
+        'localhost',
+    ]

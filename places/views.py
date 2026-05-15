@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.urls import reverse
+from django.db.models import Prefetch
 
-from places.models import Place
+from places.models import Place, Image
 
 
 def show_index(request):
@@ -30,8 +31,16 @@ def show_index(request):
 
 
 def place_detail(request, place_id):
-    place = get_object_or_404(Place, id=place_id)
-    images = place.images.all().order_by('order')
+    place = get_object_or_404(
+        Place.objects.prefetch_related(
+            Prefetch(
+                'images',
+                queryset=Image.objects.order_by('order')
+            )
+        ),
+        id=place_id
+    )
+    images = place.images.all()
 
     imgs_urls = [img.image.url for img in images]
 
